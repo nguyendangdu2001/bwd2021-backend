@@ -1,0 +1,628 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Comment {
+  """Id of comment this belong to"""
+  commentBelongId: ID
+
+  """"""
+  createdAt: Timestamp!
+
+  """Example field (placeholder)"""
+  id: ID!
+
+  """"""
+  likeCount: Float!
+
+  """media link"""
+  media: [String!]
+
+  """Id of post this belong to"""
+  postBelongId: ID
+
+  """Example field (placeholder)"""
+  postId: ID
+
+  """content of comment (text)"""
+  text: String
+
+  """"""
+  updatedAt: Timestamp!
+  user: User!
+
+  """Example field (placeholder)"""
+  userId: ID!
+}
+
+type CommentEdge {
+  cursor: String
+  node: Comment
+}
+
+type CommentPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type CommentsResponse {
+  edges: [CommentEdge!]
+  pageInfo: CommentPageInfo
+}
+
+input CreateCommentInput {
+  """Id of comment this belong to"""
+  commentBelongId: ID
+
+  """media link"""
+  media: [String!]
+
+  """Id of post this belong to"""
+  postBelongId: ID
+
+  """Example field (placeholder)"""
+  postId: ID
+
+  """content of comment (text)"""
+  text: String
+}
+
+input CreateEventInput {
+  """Example field (placeholder)"""
+  desc: String
+
+  """Example field (placeholder)"""
+  endDate: Timestamp!
+
+  """Example field (placeholder)"""
+  location: [Float!]
+
+  """Example field (placeholder)"""
+  locationName: String
+
+  """Example field (placeholder)"""
+  name: String!
+
+  """Example field (placeholder)"""
+  price: Float
+
+  """Example field (placeholder)"""
+  slot: Float
+
+  """Example field (placeholder)"""
+  startDate: Timestamp!
+}
+
+input CreateEventInvitationInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateFriendInvitationInput {
+  """Example field (placeholder)"""
+  to: ID!
+}
+
+input CreatePostInput {
+  content: String
+  eventId: ID
+  media: [String!]
+}
+
+input CreateTagInput {
+  """Example field (placeholder)"""
+  name: String!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  avatar: String
+
+  """Example field (placeholder)"""
+  firstName: String
+
+  """Example field (placeholder)"""
+  google: GoogleInput
+
+  """Example field (placeholder)"""
+  lastName: String
+
+  """Example field (placeholder)"""
+  password: String
+
+  """Example field (placeholder)"""
+  userName: String
+}
+
+type Event {
+  """Example field (placeholder)"""
+  createdAt: Timestamp!
+
+  """Example field (placeholder)"""
+  desc: String
+
+  """Example field (placeholder)"""
+  endDate: Timestamp!
+
+  """Example field (placeholder)"""
+  freeSlot: Float
+
+  """Example field (placeholder)"""
+  host: User!
+
+  """Example field (placeholder)"""
+  img: String
+
+  """Example field (placeholder)"""
+  location: [Float!]
+
+  """Example field (placeholder)"""
+  locationName: String
+
+  """Example field (placeholder)"""
+  name: String!
+
+  """Example field (placeholder)"""
+  price: Float
+
+  """Example field (placeholder)"""
+  slot: Float
+
+  """Example field (placeholder)"""
+  startDate: Timestamp!
+
+  """Example field (placeholder)"""
+  tagIds: [ID!]
+
+  """Example field (placeholder)"""
+  tags: [Tag!]
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp!
+
+  """Example field (placeholder)"""
+  userParticipate: [User!]
+}
+
+type EventInvitation {
+  """Example field (placeholder)"""
+  createdAt: Timestamp!
+
+  """Example field (placeholder)"""
+  event: Event!
+
+  """Example field (placeholder)"""
+  eventId: ID!
+
+  """Example field (placeholder)"""
+  from: User!
+
+  """Example field (placeholder)"""
+  fromId: ID!
+
+  """Example field (placeholder)"""
+  id: ID!
+
+  """Example field (placeholder)"""
+  to: User!
+
+  """Example field (placeholder)"""
+  toId: ID!
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp!
+}
+
+type FriendInvitation {
+  """Example field (placeholder)"""
+  createdAt: Timestamp!
+
+  """Example field (placeholder)"""
+  from: ID!
+  id: ID!
+
+  """Example field (placeholder)"""
+  to: ID!
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp!
+}
+
+type Google {
+  email: String!
+  id: String!
+  name: String
+}
+
+input GoogleInput {
+  email: String!
+  id: String!
+  name: String
+}
+
+input LoginInput {
+  password: String!
+  userName: String!
+}
+
+type LoginReturn {
+  """Example field (placeholder)"""
+  avatar: String
+
+  """Example field (placeholder)"""
+  createdAt: Timestamp
+
+  """Password"""
+  events: [Event!]
+
+  """First name"""
+  firstName: String
+
+  """Password"""
+  friends: [User!]
+
+  """Example field (placeholder)"""
+  google: Google
+
+  """User Id"""
+  id: ID!
+
+  """LastName"""
+  lastName: String
+  token: String!
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp
+
+  """Username"""
+  userName: String
+
+  """Example field (placeholder)"""
+  verified: Boolean
+}
+
+type Mutation {
+  acceptEventInvitation(id: Int!): EventInvitation!
+  acceptFriendInvitation(id: ID!): FriendInvitation!
+  ceatePost(createPostInput: CreatePostInput!): Post!
+  createComment(createCommentInput: CreateCommentInput!): Comment!
+  createEvent(createEventInput: CreateEventInput!): Event!
+  createEventInvitation(createEventInvitationInput: CreateEventInvitationInput!): EventInvitation!
+  createFriendInvitation(createFriendInvitationInput: CreateFriendInvitationInput!): FriendInvitation!
+  createPost(createPostInput: CreatePostInput!): Post!
+  createTag(createTagInput: CreateTagInput!): Tag!
+  createUser(createUserInput: CreateUserInput!): User!
+  likePost(idPost: ID!): Post!
+  login(loginInput: LoginInput!): LoginReturn!
+  loginGoogle(id_token: String!): LoginReturn!
+  register(registerInput: RegisterInput!): LoginReturn!
+  removeComment(id: Int!): Comment!
+  removeEvent(id: Int!): Event!
+  removeEventInvitation(id: Int!): EventInvitation!
+  removeFriendInvitation(id: ID!): FriendInvitation!
+  removePost(id: Int!): Post!
+  removeTag(id: Int!): Tag!
+  removeUser(id: String!): User!
+  unLikePost(idPost: ID!): Post!
+  updateComment(updateCommentInput: UpdateCommentInput!): Comment!
+  updateEvent(updateEventInput: UpdateEventInput!): Event!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  updateTag(updateTagInput: UpdateTagInput!): Tag!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Noticfication {
+  """Example field (placeholder)"""
+  createdAt: Timestamp!
+
+  """Example field (placeholder)"""
+  to: User!
+
+  """Example field (placeholder)"""
+  toId: ID!
+
+  """Example field (placeholder)"""
+  type: NoticficationTypes!
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp!
+}
+
+enum NoticficationTypes {
+  EVENT_NOTICFICATION
+  FRIEND_INVITAION_NOTICFICATION
+  POST_NOTICFIATION
+}
+
+type PageData {
+  count: Float!
+  limit: Float!
+  offset: Float!
+}
+
+type Post {
+  author: User!
+  authorId: ID!
+  commentCount: Float
+  comments(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+  ): CommentsResponse!
+  content: String
+  createdAt: Timestamp
+  event: Event
+  eventId: ID
+
+  """User Id"""
+  id: ID!
+  isUserLiked: Boolean!
+  likeCount: Float
+  media: [String!]
+  peopleLiked: [User!]
+  updatedAt: Timestamp
+}
+
+type PostEdge {
+  cursor: String
+  node: Post
+}
+
+type PostPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type PostsResponse {
+  edges: [PostEdge!]
+  pageInfo: PostPageInfo
+}
+
+type Query {
+  comment(id: Int!): Comment!
+  comments: [Comment!]!
+  event(id: Int!): Event!
+  eventInvitations: [EventInvitation!]!
+  events: [Event!]!
+  me: User!
+  noticfications: [Noticfication!]!
+  post(id: Int!): Post!
+  posts(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+  ): PostsResponse!
+  tag(id: Int!): Tag!
+  tags(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+    key: String!
+
+    """Paginate last"""
+    last: Float
+  ): TagsResponse!
+  user(id: String!): User!
+  userFriendInvitations: [FriendInvitation!]!
+  userPosts(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+    userId: ID!
+  ): PostsResponse!
+  users(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+  ): UsersResponse!
+}
+
+input RegisterInput {
+  """First name"""
+  firstName: String
+
+  """LastName"""
+  lastName: String
+  password: String!
+
+  """Username"""
+  userName: String
+}
+
+type Tag {
+  """Example field (placeholder)"""
+  createdAt: Timestamp!
+
+  """Example field (placeholder)"""
+  id: ID!
+
+  """Example field (placeholder)"""
+  name: String!
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp!
+}
+
+type TagEdge {
+  cursor: String
+  node: Tag
+}
+
+type TagPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type TagsResponse {
+  edges: [TagEdge!]
+  pageInfo: TagPageInfo
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+input UpdateCommentInput {
+  """Id of comment this belong to"""
+  commentBelongId: ID
+  id: Int!
+
+  """media link"""
+  media: [String!]
+
+  """Id of post this belong to"""
+  postBelongId: ID
+
+  """Example field (placeholder)"""
+  postId: ID
+
+  """content of comment (text)"""
+  text: String
+}
+
+input UpdateEventInput {
+  """Example field (placeholder)"""
+  desc: String
+
+  """Example field (placeholder)"""
+  endDate: Timestamp
+  id: Int!
+
+  """Example field (placeholder)"""
+  location: [Float!]
+
+  """Example field (placeholder)"""
+  locationName: String
+
+  """Example field (placeholder)"""
+  name: String
+
+  """Example field (placeholder)"""
+  price: Float
+
+  """Example field (placeholder)"""
+  slot: Float
+
+  """Example field (placeholder)"""
+  startDate: Timestamp
+}
+
+input UpdatePostInput {
+  content: String
+  id: Int!
+}
+
+input UpdateTagInput {
+  id: Int!
+
+  """Example field (placeholder)"""
+  name: String
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  avatar: String
+
+  """Example field (placeholder)"""
+  firstName: String
+  id: ID!
+
+  """Example field (placeholder)"""
+  lastName: String
+}
+
+type User {
+  """Example field (placeholder)"""
+  avatar: String
+
+  """Example field (placeholder)"""
+  createdAt: Timestamp
+
+  """Password"""
+  events: [Event!]
+
+  """First name"""
+  firstName: String
+
+  """Password"""
+  friends: [User!]
+
+  """Example field (placeholder)"""
+  google: Google
+
+  """User Id"""
+  id: ID!
+
+  """LastName"""
+  lastName: String
+
+  """Example field (placeholder)"""
+  updatedAt: Timestamp
+
+  """Username"""
+  userName: String
+
+  """Example field (placeholder)"""
+  verified: Boolean
+}
+
+type UserEdge {
+  cursor: String
+  node: User
+}
+
+type UserPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type UsersResponse {
+  edges: [UserEdge!]
+  pageInfo: UserPageInfo
+}
