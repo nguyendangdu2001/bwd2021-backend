@@ -32,7 +32,7 @@ export class Comment {
     description: 'Id of comment this belong to',
     nullable: true,
   })
-  commentBelongId: MongooseSchema.Types.ObjectId;
+  commentBelongId: Types.ObjectId;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'posts' })
   @Field(() => ID, {
@@ -61,10 +61,21 @@ export class Comment {
   })
   likeCount: number;
 
+  @Prop({ default: 0 })
+  @Field({
+    description: '',
+  })
+  commentCount: number;
+
   @Field({
     description: '',
   })
   createdAt: Date;
+
+  @Field({
+    description: '',
+  })
+  isUserLiked: boolean;
 
   @Field({
     description: '',

@@ -7,10 +7,14 @@ type Comment {
   commentBelongId: ID
 
   """"""
+  commentCount: Float!
+
+  """"""
   createdAt: Timestamp!
 
   """Example field (placeholder)"""
   id: ID!
+  isUserLiked: Boolean!
 
   """"""
   likeCount: Float!
@@ -294,11 +298,12 @@ type Mutation {
   createPost(createPostInput: CreatePostInput!): Post!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
+  likeComment(id: ID!): Comment!
   likePost(idPost: ID!): Post!
   login(loginInput: LoginInput!): LoginReturn!
   loginGoogle(id_token: String!): LoginReturn!
   register(registerInput: RegisterInput!): LoginReturn!
-  removeComment(id: Int!): Comment!
+  removeComment(id: ID!): Comment!
   removeEvent(id: Int!): Event!
   removeEventInvitation(id: Int!): EventInvitation!
   removeFriendInvitation(id: ID!): FriendInvitation!
@@ -306,6 +311,7 @@ type Mutation {
   removeTag(id: Int!): Tag!
   removeUser(id: String!): User!
   unLikePost(idPost: ID!): Post!
+  unlikeComment(id: ID!): Comment!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   updateEvent(updateEventInput: UpdateEventInput!): Event!
   updatePost(updatePostInput: UpdatePostInput!): Post!
@@ -393,12 +399,27 @@ type PostsResponse {
 type Query {
   comment(id: Int!): Comment!
   comments: [Comment!]!
+  commentsById(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+    commentId: ID
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+    postId: ID!
+  ): CommentsResponse!
   event(id: Int!): Event!
   eventInvitations: [EventInvitation!]!
   events: [Event!]!
   me: User!
   noticfications: [Noticfication!]!
-  post(id: Int!): Post!
+  post(id: ID!): Post!
   posts(
     """Paginate after opaque cursor"""
     after: String

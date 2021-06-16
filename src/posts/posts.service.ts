@@ -50,8 +50,8 @@ export class PostsService {
     return Promise.all([await getPosts, await getCount]);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: string) {
+    return await this.postModel.findById(id);
   }
   async likePost(userId: string, postId: string) {
     const data = await this.neo4jService.write(

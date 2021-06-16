@@ -64,8 +64,8 @@ export class PostsResolver {
     return { ...page };
   }
   @Query(() => Post, { name: 'post' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.postsService.findOne(id);
+  async findOne(@Args('id', { type: () => ID }) id: string) {
+    return await this.postsService.findOne(id);
   }
 
   @Mutation(() => Post)
