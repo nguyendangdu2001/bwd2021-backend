@@ -77,7 +77,6 @@ export class UsersService {
           },
         });
         const data = await this.createNewUserNode(newUser.id);
-        console.log(data, 'aaaaa');
 
         return newUser;
       }

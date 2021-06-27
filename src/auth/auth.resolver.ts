@@ -40,8 +40,6 @@ export class AuthResolver {
     @Args({ name: 'id_token' }) _id_token: string,
     @User() user: UserEntity,
   ) {
-    console.log('return', user);
-
     return { ...user, id: user?._id };
   }
 
@@ -52,7 +50,6 @@ export class AuthResolver {
     @Args({ name: 'loginInput' }) _loginInput: LoginInput,
     @User() user: UserEntity,
   ) {
-    console.log('return', user);
     return { ...user, id: user?._id };
   }
 

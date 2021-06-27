@@ -6,9 +6,10 @@ export type Neo4jScheme =
   | 'bolt+s'
   | 'bolt+ssc';
 export interface Neo4jConfig {
+  url?: string;
   scheme: Neo4jScheme;
-  host: string;
-  port: number | string;
+  host?: string;
+  port?: number | string;
   username: string;
   password: string;
   database?: string;

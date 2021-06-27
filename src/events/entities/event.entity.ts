@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Schema as MongooseSchema } from 'mongoose';
+import { Schema as MongooseSchema, Types } from 'mongoose';
 import { Tag } from 'src/tags/entities/tag.entity';
 import { User } from 'src/users/entities/user.entity';
 
@@ -9,6 +9,8 @@ export type EventDocument = Event & Document;
 @Schema({ timestamps: true })
 @ObjectType()
 export class Event {
+  @Field(() => ID, { description: 'Example field (placeholder)' })
+  id: string;
   @Prop()
   @Field({ description: 'Example field (placeholder)' })
   name: string;
@@ -16,7 +18,7 @@ export class Event {
   host: User;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'user' })
-  hostId: MongooseSchema.Types.ObjectId;
+  hostId: Types.ObjectId;
 
   @Prop()
   @Field({ description: 'Example field (placeholder)', nullable: true })

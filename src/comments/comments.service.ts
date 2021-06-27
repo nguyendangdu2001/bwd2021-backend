@@ -164,7 +164,6 @@ export class CommentsService {
     `,
       { userId, commentId },
     );
-    console.log(data);
 
     return data.records?.length > 0;
   }

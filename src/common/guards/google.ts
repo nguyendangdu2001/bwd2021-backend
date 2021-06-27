@@ -11,7 +11,7 @@ export class GoogleGuard
     const ctx = GqlExecutionContext.create(context);
     const req = ctx.getContext().req;
     req.body.id_token = ctx.getArgs().id_token;
-    console.log(ctx.getContext().req.logIn);
+    // console.log(ctx.getContext().req.logIn);
 
     console.log('go here');
 

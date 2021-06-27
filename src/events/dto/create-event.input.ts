@@ -13,6 +13,7 @@ export class CreateEventInput extends PickType(
     'name',
     'price',
     'slot',
+    'img',
   ],
   InputType,
 ) {

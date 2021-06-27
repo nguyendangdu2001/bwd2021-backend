@@ -54,10 +54,9 @@ import { TagsModule } from './tags/tags.module';
     NoticficationsModule,
     EventInvitationsModule,
     Neo4jModule.forRoot({
-      host: 'localhost',
-      port: 7687,
+      url: 'neo4j+s://7b9239c3.databases.neo4j.io',
       scheme: 'neo4j',
-      username: 'nguyendangdu2001',
+      username: 'neo4j',
       password: 'yasuo123',
       database: 'neo4j',
     }),

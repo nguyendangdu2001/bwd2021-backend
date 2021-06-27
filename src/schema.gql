@@ -81,6 +81,9 @@ input CreateEventInput {
   endDate: Timestamp!
 
   """Example field (placeholder)"""
+  img: String
+
+  """Example field (placeholder)"""
   location: [Float!]
 
   """Example field (placeholder)"""
@@ -152,9 +155,10 @@ type Event {
 
   """Example field (placeholder)"""
   freeSlot: Float
+  host: User!
 
   """Example field (placeholder)"""
-  host: User!
+  id: ID!
 
   """Example field (placeholder)"""
   img: String
@@ -190,6 +194,11 @@ type Event {
   userParticipate: [User!]
 }
 
+type EventEdge {
+  cursor: String
+  node: Event
+}
+
 type EventInvitation {
   """Example field (placeholder)"""
   createdAt: Timestamp!
@@ -217,6 +226,18 @@ type EventInvitation {
 
   """Example field (placeholder)"""
   updatedAt: Timestamp!
+}
+
+type EventPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type EventsResponse {
+  edges: [EventEdge!]
+  pageInfo: EventPageInfo
 }
 
 type FriendInvitation {
@@ -418,6 +439,19 @@ type Query {
   eventInvitations: [EventInvitation!]!
   events: [Event!]!
   me: User!
+  myEvent(
+    """Paginate after opaque cursor"""
+    after: String
+
+    """Paginate before opaque cursor"""
+    before: String
+
+    """Paginate first"""
+    first: Float
+
+    """Paginate last"""
+    last: Float
+  ): EventsResponse!
   noticfications: [Noticfication!]!
   post(id: ID!): Post!
   posts(
@@ -552,6 +586,9 @@ input UpdateEventInput {
   """Example field (placeholder)"""
   endDate: Timestamp
   id: Int!
+
+  """Example field (placeholder)"""
+  img: String
 
   """Example field (placeholder)"""
   location: [Float!]
