@@ -1,6 +1,15 @@
-import { InputType, PickType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType, PickType } from '@nestjs/graphql';
 import { Event } from '../entities/event.entity';
 
+@InputType()
+class TagEventInput {
+  @Field({ nullable: true })
+  id: string;
+  @Field({ nullable: true })
+  name: string;
+  @Field({ nullable: true })
+  isNew: boolean;
+}
 @InputType()
 export class CreateEventInput extends PickType(
   Event,
@@ -18,4 +27,7 @@ export class CreateEventInput extends PickType(
   InputType,
 ) {
   hostId: string;
+
+  @Field(() => [TagEventInput], { nullable: true })
+  tags: TagEventInput[];
 }

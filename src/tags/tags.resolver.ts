@@ -17,7 +17,7 @@ export class TagsResolver {
     return this.tagsService.create(createTagInput);
   }
 
-  @Query(() => TagsResponse, { name: 'tags' })
+  @Query(() => TagsResponse, { name: 'suggestionTags' })
   async findAll(@Args() args: SearchTagArgs) {
     const { limit, offset } = args.pagingParams();
     const [posts, count] = await this.tagsService.search(
@@ -29,7 +29,7 @@ export class TagsResolver {
       arrayLength: count,
       sliceStart: offset || 0,
     });
-    return { page, pageData: { count, limit, offset } };
+    return { ...page };
   }
 
   @Query(() => Tag, { name: 'tag' })

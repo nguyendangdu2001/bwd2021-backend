@@ -16,8 +16,8 @@ export class UsersService {
     // console.log(neo4jService);
   }
 
-  async findByLocalAccount(userName: string, password: string) {
-    return await this.userModel.findOne({ userName, password });
+  async findByUserName(userName: string) {
+    return await this.userModel.findOne({ userName });
   }
 
   async createNewUserNode(id: string) {
@@ -76,7 +76,7 @@ export class UsersService {
             email: googleProfile.payload.email,
           },
         });
-        const data = await this.createNewUserNode(newUser.id);
+        this.createNewUserNode(newUser.id);
 
         return newUser;
       }

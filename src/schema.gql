@@ -100,6 +100,7 @@ input CreateEventInput {
 
   """Example field (placeholder)"""
   startDate: Timestamp!
+  tags: [TagEventInput!]
 }
 
 input CreateEventInvitationInput {
@@ -467,8 +468,7 @@ type Query {
     """Paginate last"""
     last: Float
   ): PostsResponse!
-  tag(id: Int!): Tag!
-  tags(
+  suggestionTags(
     """Paginate after opaque cursor"""
     after: String
 
@@ -482,6 +482,7 @@ type Query {
     """Paginate last"""
     last: Float
   ): TagsResponse!
+  tag(id: Int!): Tag!
   user(id: String!): User!
   userFriendInvitations: [FriendInvitation!]!
   userPosts(
@@ -542,6 +543,12 @@ type Tag {
 type TagEdge {
   cursor: String
   node: Tag
+}
+
+input TagEventInput {
+  id: String
+  isNew: Boolean
+  name: String
 }
 
 type TagPageInfo {
@@ -607,6 +614,7 @@ input UpdateEventInput {
 
   """Example field (placeholder)"""
   startDate: Timestamp
+  tags: [TagEventInput!]
 }
 
 input UpdatePostInput {

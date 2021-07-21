@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  NotAcceptableException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -8,7 +9,8 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import { RegisterInput } from './dto/register.input';
 import { GoogleProfile } from './interface/GoogleProfile.interface';
-
+import { hash, compare } from 'bcrypt';
+import { Request } from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -49,16 +51,22 @@ export class AuthService {
     }
   }
   async validateNormalUser(userName: string, password: string) {
-    const user = await this.userService.findByLocalAccount(userName, password);
+    const user = await this.userService.findByUserName(userName);
     if (!user) throw new BadRequestException();
+    const passwordCheck = await compare(password, user.password);
+    if (!passwordCheck)
+      throw new NotAcceptableException('Username or Password not correct');
     return user;
   }
-  async register(req, registerInput: RegisterInput) {
+  async register(req: Request, registerInput: RegisterInput) {
     const checkExist = await this.userService.findOne({
       userName: registerInput.userName,
     });
     if (checkExist) throw new Error('Username exist');
-    const user = await this.userService.create(registerInput);
+    const user = await this.userService.create({
+      ...registerInput,
+      password: await hash(registerInput.password, 'ssdfsaafd'),
+    });
     const signed = this.jwt.sign({ userId: user.id });
     console.log(signed);
 
