@@ -17,6 +17,7 @@ import { NoticficationsModule } from './noticfications/noticfications.module';
 import { EventInvitationsModule } from './event-invitations/event-invitations.module';
 import { Neo4jModule } from './neo4j/neo4j.module';
 import { TagsModule } from './tags/tags.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -61,6 +62,9 @@ import { TagsModule } from './tags/tags.module';
       database: 'neo4j',
     }),
     TagsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'distClient'),
+    }),
   ],
   controllers: [],
   providers: [{ provide: APP_GUARD, useClass: AuthenticatedGuard }],
